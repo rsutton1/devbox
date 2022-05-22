@@ -102,3 +102,9 @@ $ git add dot_some_dotfile salt/files/packages.sls
 $ git commit -m "changed some dotfile, changed packages"
 $ git push
 ```
+
+If the repo was cloned with HTTPS via chezmoi, run this before pushing:
+
+```
+$ git remote set-url origin git@github.com:rsutton1/dotfiles.git
+```
