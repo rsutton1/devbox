@@ -94,8 +94,10 @@ Once you've provisioned your system and made some local changes, here's how to
 save them back into the repo.
 
 ```
+$ chezmoi diff # you should see chezmoi wants to undo your changes
 $ chezmoi add ~/.some_dotfile
 $ chezmoi add salt/files/packages.sls
+$ chezmoi diff # should be no changes
 $ chezmoi cd
 $ git add dot_some_dotfile salt/files/packages.sls
 $ git commit -m "changed some dotfile, changed packages"
