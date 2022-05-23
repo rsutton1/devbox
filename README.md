@@ -76,17 +76,16 @@ installing them.
 ## Pull and view changes
 
 ```
-$ cd ~/salt
-$ chezmoi git pull -- --rebase && chezmoi diff
-$ sudo salt-call state.sls packages test=true
+$ chezmoi git pull
+$ cd ~/salt && chezmoi apply . # required to show package changes
+$ sudo salt-call state.sls packages test=true && chezmoi diff
 ```
 
 ## Apply
 
 ```
 $ cd ~/salt
-$ chezmoi apply
-$ sudo salt-call state.sls packages
+$ sudo salt-call state.sls packages && chezmoi apply
 ```
 
 # Save changes
