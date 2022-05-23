@@ -1,11 +1,38 @@
-neovim_archive:
+neovim_build_deps:
+  pkg.installed:
+    - pkgs:
+      - ninja-build
+      - gettext
+      - libtool
+      - libtool-bin
+      - autoconf
+      - automake
+      - cmake
+      - g++
+      - pkg-config
+      - unzip
+      - curl
+      - doxygen
+    - prereq:
+      - cmd: neovim_installed
+
+neovim_downloaded:
   archive.extracted:
-    - name: /usr/local/bin/
+    - name: /tmp/
     - trim_output: 0
-    - source: https://github.com/neovim/neovim/releases/download/v0.7.0/nvim-linux64.tar.gz
-    - source_hash: 5b3fced3f185ae1e1497cb5f949597c4065585fc26e7cd25a31f5f791dbd9b59
-    - options: --extract nvim-linux64/bin/nvim --strip-components=2
-    - enforce_toplevel: False
+    - source: https://github.com/neovim/neovim/archive/refs/tags/v0.7.0.tar.gz
+    - source_hash: 792a9c55d5d5f4a5148d475847267df309d65fb20f05523f21c1319ea8a6c7df
+    - prereq:
+      - cmd: neovim_installed
+
+neovim_installed:
+  cmd.run:
+    - name: |
+        make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=/opt/neovim"
+        make install
+    - cwd: /tmp/neovim-0.7.0
+    - hide_output: True
+    - unless: /opt/neovim/bin/nvim --version | grep 0.7.0
 
 deps:
   pkg.installed:
