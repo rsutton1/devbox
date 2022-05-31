@@ -22,6 +22,7 @@ neovim_downloaded:
     - trim_output: 0
     - source: https://github.com/neovim/neovim/archive/refs/tags/v0.7.0.tar.gz
     - source_hash: 792a9c55d5d5f4a5148d475847267df309d65fb20f05523f21c1319ea8a6c7df
+    - hide_output: True
     - prereq:
       - cmd: neovim_installed
 
@@ -34,8 +35,13 @@ neovim_installed:
     - hide_output: True
     - unless: /opt/neovim/bin/nvim --version | grep 0.7.0
 
-deps:
+neovim_ag_installed:
   pkg.installed:
     - pkgs:
-      - tmux
       - silversearcher-ag
+
+neovim_plugins_installed:
+  cmd.run:
+    - name: /opt/neovim/bin/nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
+    - require:
+      - cmd: neovim_installed
