@@ -14,9 +14,19 @@ chezmoi_installed:
     - onchanges:
       - archive: chezmoi_extracted
 
-chezmo_attrs:
+chezmoi_attrs:
   file.managed:
     - name: /usr/local/bin/chezmoi
     - mode: 0755
     - require:
       - file: chezmoi_installed
+
+chezmoi_diff:
+  cmd.run:
+    - name: /usr/local/bin/chezmoi apply
+    - runas: vagrant
+    - cwd: /home/vagrant
+    - stateful:
+      - test_name: /usr/local/bin/chezmoi diff
+    - require:
+      - file: chezmoi_attrs
