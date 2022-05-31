@@ -28,9 +28,9 @@ neovim_downloaded:
 neovim_installed:
   cmd.run:
     - name: |
+        cd /tmp/neovim-0.7.0
         make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=/opt/neovim"
         make install
-    - cwd: /tmp/neovim-0.7.0
     - hide_output: True
     - unless: /opt/neovim/bin/nvim --version | grep 0.7.0
 
