@@ -23,10 +23,10 @@ chezmoi_attrs:
 
 chezmoi_diff:
   cmd.run:
-    - name: /usr/local/bin/chezmoi apply
+    - name: sudo -u vagrant /usr/local/bin/chezmoi apply
     - runas: vagrant
     - cwd: /home/vagrant
     - stateful:
-      - test_name: /usr/local/bin/chezmoi diff
+      - test_name: sudo -u vagrant /usr/local/bin/chezmoi diff
     - require:
       - file: chezmoi_attrs
