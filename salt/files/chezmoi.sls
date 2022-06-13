@@ -1,3 +1,5 @@
+{% set user = salt.environ.get("SUDO_USER") %}
+
 chezmoi_extracted:
   archive.extracted:
     - name: /tmp/chezmoi
@@ -23,10 +25,10 @@ chezmoi_attrs:
 
 chezmoi_diff:
   cmd.run:
-    - name: sudo -u vagrant /usr/local/bin/chezmoi apply
-    - runas: vagrant
-    - cwd: /home/vagrant
+    - name: sudo -u {{ user }} /usr/local/bin/chezmoi apply
+    - runas: {{ user }}
+    - cwd: /home/{{ user }}
     - stateful:
-      - test_name: sudo -u vagrant /usr/local/bin/chezmoi diff
+      - test_name: sudo -u {{ user }} /usr/local/bin/chezmoi diff
     - require:
       - file: chezmoi_attrs

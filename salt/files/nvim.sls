@@ -1,3 +1,5 @@
+{% set user = salt.environ.get("SUDO_USER") %}
+
 neovim_build_deps:
   pkg.installed:
     - pkgs:
@@ -42,6 +44,6 @@ neovim_ag_installed:
 
 neovim_plugins_installed:
   cmd.run:
-    - name: /opt/neovim/bin/nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
+    - name: sudo -H -u {{ user }} /opt/neovim/bin/nvim -es -u /home/{{ user }}/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
     - require:
       - cmd: neovim_installed
