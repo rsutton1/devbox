@@ -47,18 +47,11 @@ $ chezmoi apply
 
 Let's install Salt and then use it to install the packages.
 
-### Install Salt
+### Dependencies
 
-If you're on Debian, you can use the provided script to install Salt into a
-self-contained venv (my preference).
+Salt 3004.X: download for your platform here https://repo.saltproject.io/
 
-```
-$ ~/salt/install_salt.sh
-```
-
-Otherwise, you can use [ salt-bootstrap
-](https://github.com/saltstack/salt-bootstrap#install-using-curl), a convenient
-cross-platform bash script to install Salt.
+Only the salt-call binary is required.
 
 ### Install packages
 

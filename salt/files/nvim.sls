@@ -47,3 +47,6 @@ neovim_plugins_installed:
     - name: sudo -H -u {{ user }} /opt/neovim/bin/nvim -es -u /home/{{ user }}/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
     - require:
       - cmd: neovim_installed
+
+npm:
+  pkg.installed
