@@ -16,6 +16,7 @@ SALT_SYMLINK_DIR=/usr/local/bin
 
 # install salt into virtualenv
 if [ -f $SALT_SYMLINK_DIR/salt-call ]; then
+    echo "salt-call already installed at $SALT_SYMLINK_DIR/salt-call. Exiting..."
     exit 0
 fi
 sudo apt-get install python3-venv -y
