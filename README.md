@@ -57,8 +57,8 @@ Only the salt-call binary is required.
 
 ```
 $ cd salt/
-$ sudo salt-call state.sls packages test=true # show what Salt would do
-$ sudo salt-call state.sls packages
+$ sudo salt-call state.apply test=true # show what Salt would do
+$ sudo salt-call state.apply
 ```
 
 # Reprovisioning
@@ -71,14 +71,14 @@ installing them.
 ```
 $ chezmoi git pull
 $ cd ~/salt && chezmoi apply . # required to show package changes
-$ sudo salt-call state.sls packages test=true && chezmoi diff
+$ sudo salt-call state.apply test=true && chezmoi diff
 ```
 
 ## Apply
 
 ```
 $ cd ~/salt
-$ sudo salt-call state.sls packages && chezmoi apply
+$ sudo salt-call state.apply
 ```
 
 # Save changes
