@@ -30,55 +30,22 @@ complete solution.
 
 Currently only works on Debian-based systems. Tested with Salt 3004.
 
-# Provisioning a new system
-
-## Dotfiles
-
-The following commands will install `chezmoi` and copy the dotfiles to your
-system in the correct location.
-
-```
-$ sh -c "$(curl -fsLS chezmoi.io/get)" -- init rsutton1
-$ chezmoi diff # see what chezmoi would do
-$ chezmoi apply
-```
-
-## Packages
-
-Let's install Salt and then use it to install the packages.
-
 ### Dependencies
 
 Salt 3004.X: download for your platform here https://repo.saltproject.io/
 
-Only the salt-call binary is required.
+Using [salt-bootstrap]():
+```
+sudo sh bootstrap-salt.sh -X stable 3004.2
+```
 
-### Install packages
+# Provisioning a new system
 
 ```
-$ cd salt/
+$ git clone https://github.com/rsutton1/dotfiles.git
+$ cd dotfiles/salt
 $ sudo salt-call state.apply test=true # show what Salt would do
-$ sudo salt-call state.apply
-```
-
-# Reprovisioning
-
-To reprovision we pull remote changes and verify they look correct before
-installing them.
-
-## Pull and view changes
-
-```
-$ chezmoi git pull
-$ cd ~/salt && chezmoi apply . # required to show package changes
-$ sudo salt-call state.apply test=true && chezmoi diff
-```
-
-## Apply
-
-```
-$ cd ~/salt
-$ sudo salt-call state.apply
+$ sudo salt-call state.apply # apply changes to your system
 ```
 
 # Save changes
