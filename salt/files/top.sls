@@ -5,3 +5,4 @@ base:
     - nvim
     - pyenv
     - saltlsp
+    - rbenv

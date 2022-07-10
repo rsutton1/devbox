@@ -20,6 +20,7 @@ chezmoi_attrs:
   file.managed:
     - name: /usr/local/bin/chezmoi
     - mode: 0755
+    - replace: False
     - require:
       - file: chezmoi_installed
 
