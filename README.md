@@ -34,7 +34,7 @@ Currently only works on Debian-based systems. Tested with Salt 3004.
 
 Salt 3004.X: download for your platform here https://repo.saltproject.io/
 
-Using [salt-bootstrap]():
+Using [salt-bootstrap](https://github.com/saltstack/salt-bootstrap#id4):
 ```
 sudo sh bootstrap-salt.sh -X stable 3004.2
 ```
