@@ -1,6 +1,10 @@
 file_client: local
 fileserver_backend:
   - roots
+  - gitfs
+
+gitfs_remotes:
+  - https://github.com/saltstack-formulas/docker-formula
 
 root_dir: .
 file_roots:
