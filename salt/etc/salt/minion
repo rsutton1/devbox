@@ -5,8 +5,12 @@ fileserver_backend:
 
 gitfs_remotes:
   - https://github.com/saltstack-formulas/docker-formula
+  - https://github.com/saltstack-formulas/node-formula
 
 root_dir: .
 file_roots:
   base:
     - files
+pillar_roots:
+  base:
+    - pillar

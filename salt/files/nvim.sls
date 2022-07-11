@@ -1,5 +1,7 @@
 {% set user = salt.environ.get("SUDO_USER") %}
 {% set nvim_path = "/usr/local/nvim" %}
+include:
+ - node.archive
 
 neovim_build_deps:
   pkg.installed:
@@ -29,6 +31,13 @@ neovim_downloaded:
     - prereq:
       - cmd: neovim_installed
 
+nvim_dir:
+  file.directory:
+    - name: {{ nvim_path }}/bin
+    - makedirs: True
+    - prereq:
+      - neovim_installed
+
 neovim_installed:
   cmd.run:
     - name: |
@@ -48,6 +57,4 @@ neovim_plugins_installed:
     - name: sudo -H -u {{ user }} {{ nvim_path }}/bin/nvim -es -u /home/{{ user }}/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
     - require:
       - cmd: neovim_installed
-
-npm:
-  pkg.installed
+      - node-archive-install-file-symlink-node # for coc
