@@ -24,6 +24,15 @@ chezmoi_attrs:
     - require:
       - file: chezmoi_installed
 
+chezmoi_init:
+  cmd.run:
+    - name: /usr/local/bin/chezmoi init {{ salt.pillar.get("chezmoi:repo") }}
+    - runas: {{ user }}
+    - cwd: /home/{{ user }}
+    - creates: /home/{{ user }}/.local/share/chezmoi
+    - require:
+      - file: chezmoi_attrs
+
 chezmoi_diff:
   cmd.run:
     - name: sudo -u {{ user }} /usr/local/bin/chezmoi apply
@@ -32,4 +41,4 @@ chezmoi_diff:
     - stateful:
       - test_name: sudo -u {{ user }} /usr/local/bin/chezmoi diff
     - require:
-      - file: chezmoi_attrs
+      - cmd: chezmoi_init
