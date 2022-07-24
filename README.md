@@ -26,10 +26,6 @@ Saltstack ](https://saltproject.io/). Chezmoi is excellent for static dotfiles
 and Salt meets these goals for packages. By combining the two, it provides a
 complete solution.
 
-## Note
-
-Currently only works on Debian-based systems. Tested with Salt 3004.
-
 # Provisioning
 
 Clone the repo:
@@ -54,6 +50,8 @@ sudo salt-call state.apply # provision changes inside VM
 ```
 
 ## Host
+
+Currently only works on Debian-based systems.
 
 ### Dependencies
 
