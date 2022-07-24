@@ -5,4 +5,4 @@ base:
     - nvim
     - pyenv
     - saltlsp
-    - rbenv
+    - kitchen
