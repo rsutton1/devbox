@@ -30,6 +30,24 @@ complete solution.
 
 Currently only works on Debian-based systems. Tested with Salt 3004.
 
+# Provisioning
+
+There are two options for provisioning: inside a VM or directly on the host.
+
+## VM
+
+Install Vagrant: https://www.vagrantup.com/downloads
+
+Then run:
+
+```
+vagrant up
+vagrant ssh -- -A # ssh forwarding for pushing code changes
+sudo salt-call state.apply # provision changes inside VM
+```
+
+## Host
+
 ### Dependencies
 
 Salt 3004.X: download for your platform here https://repo.saltproject.io/
@@ -39,18 +57,19 @@ Using [salt-bootstrap](https://github.com/saltstack/salt-bootstrap#install-using
 sudo sh bootstrap-salt.sh -X stable 3004.2
 ```
 
-# Provisioning a new system
+### Commands
 
 ```
 $ git clone https://github.com/rsutton1/dotfiles.git
 $ cd dotfiles/salt
+$ sudo ./configure.sh # setup salt installation
 $ sudo salt-call state.apply test=true # show what Salt would do
 $ sudo salt-call state.apply # apply changes to your system
 ```
 
 # Save changes
 
-Once you've provisioned your system and made some local changes, here's how to
+Once you've provisioned your system and changed dotfiles, here's how to
 save them back into the repo.
 
 ```
