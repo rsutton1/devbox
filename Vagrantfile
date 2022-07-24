@@ -76,9 +76,10 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision :salt do |salt|
     salt.masterless = true
-    salt.minion_config = "salt/bootstrap"
+    salt.minion_config = "salt/system"
     salt.run_highstate = true
   end
+  config.vm.provision 'shell', path: 'salt/configure.sh'
 #  config.vm.provision :salt do |salt|
 #    salt.masterless = true
 #    salt.minion_config = "salt/system"
