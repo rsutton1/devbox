@@ -32,6 +32,12 @@ Currently only works on Debian-based systems. Tested with Salt 3004.
 
 # Provisioning
 
+Clone the repo:
+
+```
+git clone https://github.com/rsutton1/dotfiles.git
+```
+
 There are two options for provisioning: inside a VM or directly on the host.
 
 ## VM
@@ -41,6 +47,7 @@ Install Vagrant: https://www.vagrantup.com/downloads
 Then run:
 
 ```
+cd dotfiles
 vagrant up
 vagrant ssh -- -A # ssh forwarding for pushing code changes
 sudo salt-call state.apply # provision changes inside VM
@@ -60,7 +67,6 @@ sudo sh bootstrap-salt.sh -X stable 3004.2
 ### Commands
 
 ```
-$ git clone https://github.com/rsutton1/dotfiles.git
 $ cd dotfiles/salt
 $ sudo ./configure.sh # setup salt installation
 $ sudo salt-call state.apply test=true # show what Salt would do
