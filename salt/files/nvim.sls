@@ -56,5 +56,6 @@ neovim_plugins_installed:
   cmd.run:
     - name: sudo -H -u {{ user }} {{ nvim_path }}/bin/nvim -es -u /home/{{ user }}/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
     - require:
-      - cmd: neovim_installed
+      - neovim_installed
       - node-archive-install-file-symlink-node # for coc
+      - neovim_ag_installed
