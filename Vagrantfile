@@ -77,12 +77,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :salt do |salt|
     salt.masterless = true
     salt.minion_config = "salt/system"
-    salt.run_highstate = true
+    salt.run_highstate = false
   end
   config.vm.provision 'shell', path: 'salt/configure.sh'
-#  config.vm.provision :salt do |salt|
-#    salt.masterless = true
-#    salt.minion_config = "salt/system"
-#    salt.run_highstate = true
-#  end
 end
