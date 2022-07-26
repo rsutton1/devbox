@@ -3,4 +3,4 @@ base:
     - chezmoi
     - tmux
     - nvim
-    - rbenv
+    - kitchen
