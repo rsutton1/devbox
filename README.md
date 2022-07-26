@@ -65,10 +65,10 @@ sudo sh bootstrap-salt.sh -X stable 3004.2
 ### Commands
 
 ```
-$ cd dotfiles/salt
-$ sudo ./configure.sh # setup salt installation
-$ sudo salt-call state.apply test=true # show what Salt would do
-$ sudo salt-call state.apply # apply changes to your system
+cd dotfiles/salt
+sudo ./configure.sh # setup salt installation
+sudo salt-call state.apply test=true # show what Salt would do
+sudo salt-call state.apply # apply changes to your system
 ```
 
 # Save changes
@@ -77,18 +77,31 @@ Once you've provisioned your system and changed dotfiles, here's how to
 save them back into the repo.
 
 ```
-$ chezmoi diff # you should see chezmoi wants to undo your changes
-$ chezmoi add ~/.some_dotfile
-$ chezmoi add salt/files/packages.sls
-$ chezmoi diff # should be no changes
-$ chezmoi cd
-$ git add dot_some_dotfile salt/files/packages.sls
-$ git commit -m "changed some dotfile, changed packages"
-$ git push
+chezmoi diff # you should see chezmoi wants to undo your changes
+chezmoi add ~/.some_dotfile
+chezmoi add salt/files/packages.sls
+chezmoi diff # should be no changes
+chezmoi cd
+git add dot_some_dotfile salt/files/packages.sls
+git commit -m "changed some dotfile, changed packages"
+git push
 ```
 
 If the repo was cloned with HTTPS via chezmoi, run this before pushing:
 
 ```
 $ git remote set-url origin git@github.com:rsutton1/dotfiles.git
+```
+
+# Testing
+
+Use kitchen-docker to test.
+
+```
+cd dotfiles/salt
+sudo salt-call state.apply kitchen
+source ~/.bashrc
+rbenv local 2.6.10
+bundle install
+kitchen converge
 ```
