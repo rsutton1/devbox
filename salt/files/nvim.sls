@@ -53,11 +53,19 @@ neovim_ag_installed:
     - pkgs:
       - silversearcher-ag
 
-neovim_plugins_installed:
+neovim_plugins_vimplug:
   cmd.run:
-    - name: sudo -H -u {{ user }} {{ nvim_path }}/bin/nvim -es -u /home/{{ user }}/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
+    - name: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    - runas: {{ user }}
     - require:
       - neovim_installed
       - node-archive-install-file-symlink-node # for coc
       - neovim_ag_installed
       - salt_lsp
+
+neovim_plugins_installed:
+  cmd.run:
+    - name: {{ nvim_path }}/bin/nvim --headless +PlugInstall +qa
+    - runas: {{ user }}
+    - require:
+      - neovim_plugins_vimplug
