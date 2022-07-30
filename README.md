@@ -66,7 +66,7 @@ sudo sh bootstrap-salt.sh -X stable 3004.2
 
 ```
 cd dotfiles/salt
-sudo ./configure.sh # setup salt installation
+./configure.sh # setup salt installation
 sudo salt-call state.apply test=true # show what Salt would do
 sudo salt-call state.apply # apply changes to your system
 ```
