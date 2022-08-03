@@ -35,7 +35,7 @@ chezmoi_init:
 
 chezmoi_diff:
   cmd.run:
-    - name: sudo -u {{ user }} /usr/local/bin/chezmoi apply --force
+    - name: /usr/local/bin/chezmoi apply --force
     - runas: {{ user }}
     - cwd: /home/{{ user }}
     - stateful:
