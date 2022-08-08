@@ -103,5 +103,5 @@ sudo salt-call state.apply kitchen
 source ~/.bashrc
 rbenv local 2.6.10
 bundle install
-kitchen converge
+bundle exec kitchen converge
 ```
