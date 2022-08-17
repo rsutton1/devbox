@@ -60,6 +60,19 @@ suites:
         base:
           '*':
             - rbenv
+  - name: gh
+    provisioner:
+      state_top:
+        base:
+          '*':
+            - gh
+      pillars:
+        top.sls:
+          base:
+            '*':
+              - gh
+      pillars_from_files:
+        gh.sls: pillar/gh.sls
 verifier:
   name: inspec
   sudo: false
