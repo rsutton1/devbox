@@ -4,3 +4,4 @@ base:
     - tmux
     - nvim
     - kitchen
+    - nvm
