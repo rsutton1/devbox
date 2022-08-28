@@ -2,7 +2,6 @@
 {% set nvim_path = "/usr/local/nvim" %}
 include:
  - node.archive
- - saltlsp
 
 neovim_build_deps:
   pkg.installed:
@@ -61,7 +60,6 @@ neovim_plugins_vimplug:
       - neovim_installed
       - node-archive-install-file-symlink-node # for coc
       - neovim_ag_installed
-      - salt_lsp
 
 neovim_plugins_installed:
   cmd.run:
