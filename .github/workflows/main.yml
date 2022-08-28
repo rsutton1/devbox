@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.6.10']
+        platform: ['ubuntu','debian']
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby
@@ -29,8 +29,8 @@ jobs:
     # uses: ruby/setup-ruby@v1
       uses: ruby/setup-ruby@2b019609e2b0f1ea1a2bc8ca11cb82ab46ada124
       with:
-        ruby-version: ${{ matrix.ruby-version }}
+        ruby-version: 2.6.10
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
         working-directory: salt
     - name: Run tests
-      run: cd salt && bundle exec kitchen test nvim
+      run: cd salt && bundle exec kitchen test nvim-${{ matrix.platform }}
