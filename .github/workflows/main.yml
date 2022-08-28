@@ -33,4 +33,4 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
         working-directory: salt
     - name: Run tests
-      run: cd salt && bundle exec kitchen test
+      run: cd salt && bundle exec kitchen test nvim
