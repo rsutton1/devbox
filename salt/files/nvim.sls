@@ -1,51 +1,43 @@
 {% set user = salt.environ.get("SUDO_USER") %}
-{% set nvim_path = "/usr/local/nvim" %}
+{% set nvim_basedir = "/opt/nvim" %}
+{% set nvim_dir = nvim_basedir + "/v0.7.2" %}
+{% set nvim_current = nvim_basedir + "/current" %}
+{% set nvim_path = nvim_current + "/bin/nvim" %}
 include:
  - node.archive
 
-neovim_build_deps:
-  pkg.installed:
-    - pkgs:
-      - ninja-build
-      - gettext
-      - libtool
-      - libtool-bin
-      - autoconf
-      - automake
-      - cmake
-      - g++
-      - pkg-config
-      - unzip
-      - curl
-      - doxygen
-    - prereq:
-      - cmd: neovim_installed
-
+{% if grains['kernel'] == 'Linux' %}
 neovim_downloaded:
   archive.extracted:
-    - name: /tmp/
+    - name: {{ nvim_dir }}
     - trim_output: 0
-    - source: https://github.com/neovim/neovim/archive/refs/tags/v0.7.0.tar.gz
-    - source_hash: 792a9c55d5d5f4a5148d475847267df309d65fb20f05523f21c1319ea8a6c7df
+    - source: https://github.com/neovim/neovim/releases/download/v0.7.2/nvim-linux64.tar.gz
+    - source_hash: fa75852890ca4b57551da194c696d3bbd14d9d2e966bc188d1e7e52ee942b71d
     - hide_output: True
-    - prereq:
-      - cmd: neovim_installed
-
-nvim_dir:
-  file.directory:
-    - name: {{ nvim_path }}/bin
-    - makedirs: True
-    - prereq:
-      - neovim_installed
-
+neovim_current:
+  file.symlink:
+    - name: {{ nvim_current }}
+    - target: "{{ nvim_dir }}/nvim-linux64"
+    - force: True
+    - onchanges:
+      - neovim_downloaded
 neovim_installed:
-  cmd.run:
-    - name: |
-        cd /tmp/neovim-0.7.0
-        make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX={{ nvim_path }}"
-        make install
-    - hide_output: True
-    - unless: {{ nvim_path }}/bin/nvim --version | grep 0.7.0
+  file.copy:
+    - name: /usr/local/
+    - recurse: True
+    - source: {{ nvim_current }}
+    - require:
+      - neovim_current
+neovim_path:
+  file.blockreplace:
+    - name: /home/{{ user }}/.bashrc
+    - content: 'export PATH="{{ nvim_current }}/bin:$PATH"'
+    - marker_start: "## salt managed -- nvim start"
+    - marker_end: "## salt managed -- nvim end"
+    - append_if_not_found: True
+    - require:
+      - neovim_current
+{% endif %}
 
 neovim_ag_installed:
   pkg.installed:
@@ -63,7 +55,7 @@ neovim_plugins_vimplug:
 
 neovim_plugins_installed:
   cmd.run:
-    - name: {{ nvim_path }}/bin/nvim --headless +PlugInstall +qa
+    - name: {{ nvim_path }} --headless +PlugInstall +qa
     - runas: {{ user }}
     - require:
       - neovim_plugins_vimplug
