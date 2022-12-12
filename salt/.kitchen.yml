@@ -38,6 +38,9 @@ suites:
         - name: node
           repo: git
           source: https://github.com/saltstack-formulas/node-formula.git
+        - name: nvim
+          repo: git
+          source: https://github.com/rsutton1/nvim-formula
       pillars:
         top.sls:
           base:
