@@ -4,6 +4,7 @@ fileserver_backend:
   - gitfs
 
 gitfs_remotes:
+  - https://github.com/rsutton1/nvim-formula
   - https://github.com/saltstack-formulas/docker-formula
   - https://github.com/saltstack-formulas/node-formula
   - https://github.com/saltstack-formulas/nvm-formula

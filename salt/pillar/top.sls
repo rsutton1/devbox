@@ -4,3 +4,4 @@ base:
     - chezmoi
     - gh
     - nvm
+    - nvim
