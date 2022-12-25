@@ -1,7 +1,6 @@
-# dotfiles
+# devbox
 
-This repo stores files and scripts to provision my preferred development
-environment.
+This repo stores declarative configuration files to create my preferred development environment.
 
 This allows me to recreate my development environment across systems (e.g. if I
 get a new laptop).
