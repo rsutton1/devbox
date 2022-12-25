@@ -2,6 +2,6 @@ base:
   "*":
     - chezmoi
     - tmux
-    - nvim
+    - nvim-plugins
     - kitchen
     - nvm
