@@ -1,6 +1,7 @@
 # devbox
 
-This repo stores declarative configuration files to create my preferred development environment.
+This repo creates my preferred development environment from declarative
+configuration files.
 
 This allows me to recreate my development environment across systems (e.g. if I
 get a new laptop).
@@ -68,28 +69,6 @@ cd dotfiles/salt
 ./configure.sh # setup salt installation
 sudo salt-call state.apply test=true # show what Salt would do
 sudo salt-call state.apply # apply changes to your system
-```
-
-# Save changes
-
-Once you've provisioned your system and changed dotfiles, here's how to
-save them back into the repo.
-
-```
-chezmoi diff # you should see chezmoi wants to undo your changes
-chezmoi add ~/.some_dotfile
-chezmoi add salt/files/packages.sls
-chezmoi diff # should be no changes
-chezmoi cd
-git add dot_some_dotfile salt/files/packages.sls
-git commit -m "changed some dotfile, changed packages"
-git push
-```
-
-If the repo was cloned with HTTPS via chezmoi, run this before pushing:
-
-```
-$ git remote set-url origin git@github.com:rsutton1/dotfiles.git
 ```
 
 # Testing
