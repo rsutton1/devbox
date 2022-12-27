@@ -47,9 +47,11 @@ suites:
             '*':
               - node
               - chezmoi
+              - nvim
       pillars_from_files:
         node.sls: pillar/node.sls
         chezmoi.sls: pillar/chezmoi.sls
+        nvim.sls: pillar/nvim.sls
   - name: tmux
     provisioner:
       state_top:

@@ -1,0 +1,3 @@
+nvim:
+  vimplug:
+    managed: True
