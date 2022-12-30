@@ -31,7 +31,7 @@ complete solution.
 Clone the repo:
 
 ```
-git clone https://github.com/rsutton1/dotfiles.git
+git clone https://github.com/rsutton1/devbox.git
 ```
 
 There are three options for running the environment:
@@ -41,14 +41,36 @@ There are three options for running the environment:
 
 ## Docker
 
+### Build
+
 Install [Hashicorp Packer](https://developer.hashicorp.com/packer/downloads) and run:
 
 ```
 packer build -only='devbox-onebuild.docker.ubuntu' packer/docker-ubuntu.pkr.hcl
-docker run \
+```
+
+You should now see the container `rsutton1:nvim` appear in `docker images`.
+
+### Run
+
+Linux:
+
+Note: we pass our uid and gid so any files created will have the correct
+permissions.
+
+```
+docker run --rm \
     -e USER_ID=$(id -u) \
     -e GROUP_ID=$(id -g) \
     -v $(pwd):/code \
+    -it rsutton1:nvim
+```
+
+Windows:
+
+```
+docker run --rm \
+    -v ${PWD}:/code \
     -it rsutton1:nvim
 ```
 
@@ -75,7 +97,7 @@ Salt 3004.X: download for your platform here https://repo.saltproject.io/
 
 Using [salt-bootstrap](https://github.com/saltstack/salt-bootstrap#install-using-curl):
 ```
-sudo sh bootstrap-salt.sh -X stable 3004.2
+sudo sh bootstrap-salt.sh -X stable 3005.1
 ```
 
 ### Commands
