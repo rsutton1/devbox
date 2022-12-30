@@ -34,7 +34,23 @@ Clone the repo:
 git clone https://github.com/rsutton1/dotfiles.git
 ```
 
-There are two options for provisioning: inside a VM or directly on the host.
+There are three options for running the environment:
+ - Docker (via Hashicorp Packer)
+ - VM (via Hashicorp Vagrant)
+ - Host
+
+## Docker
+
+Install [Hashicorp Packer](https://developer.hashicorp.com/packer/downloads) and run:
+
+```
+packer build -only='devbox-onebuild.docker.ubuntu' packer/docker-ubuntu.pkr.hcl
+docker run \
+    -e USER_ID=$(id -u) \
+    -e GROUP_ID=$(id -g) \
+    -v $(pwd):/code \
+    -it rsutton1:nvim
+```
 
 ## VM
 

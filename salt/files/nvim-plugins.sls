@@ -2,6 +2,12 @@ include:
   - nvim
   - node.archive
 
+git_installed:
+  pkg.installed:
+    - name: git
+    - require_in:
+      - neovim_plugins_installed
+
 silversearcher:
   pkg.installed:
     - name: silversearcher-ag
