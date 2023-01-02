@@ -66,12 +66,10 @@ docker run --rm \
     -it rsutton1:nvim
 ```
 
-Windows:
+Windows PowerShell:
 
 ```
-docker run --rm \
-    -v ${PWD}:/code \
-    -it rsutton1:nvim
+docker run --rm -v ${PWD}:/code -it rsutton1:nvim
 ```
 
 ## VM
