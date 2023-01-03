@@ -191,7 +191,7 @@ build {
       "apt-get install salt-minion -y",
       "mv /etc/salt/minion.new /etc/salt/minion",
       "salt-call --local state.apply pygit -l quiet # for gitfs",
-      "salt-call state.apply chezmoi,nvim-plugins -l debug --state-output=changes",
+      "salt-call state.apply nvim-plugins -l debug --state-output=changes",
       "apt-get purge salt-common salt-minion curl python3 -y",
       "apt-get autoremove -y",
       "apt-get clean",
@@ -201,8 +201,11 @@ build {
       "rm -rf /var/run/salt",
       "rm -rf /etc/salt",
       "rm -rf /srv/salt",
-      "rm -rf /tmp/",
+      "rm -rf /tmp/*",
       "chmod -R 777 /root",
+      "git config --global --add safe.directory '*'",
+      "chmod 777 /entrypoint.sh",
+      "sed -i -e 's/\r$//' /entrypoint.sh",
     ]
   }
 
